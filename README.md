@@ -1,9 +1,11 @@
 # CampusHire — Intelligent College Placement & Recruitment Automation Portal
 
-[![Problem Statement ID: HACK-P410](https://img.shields.io/badge/Problem%20ID-HACK--P410-0ea5e9?style=for-the-badge&logo=target)](https://github.com/thanushsreeram/campus_backend)
-[![Team: Team ByteCraft](https://img.shields.io/badge/Team-ByteCraft-10b981?style=for-the-badge&logo=github)](https://github.com/thanushsreeram/campus_backend)
-[![Tests: 52 Passed](https://img.shields.io/badge/Tests-52%2F52%20Passed%20(100%25)-emerald?style=for-the-badge&logo=checkmarx)](https://github.com/thanushsreeram/campus_backend)
-[![Stack: React 19 + Node.js 22 + SQLite](https://img.shields.io/badge/Stack-React%2019%20%7C%20Node%2022%20%7C%20SQLite-f59e0b?style=for-the-badge&logo=react)](https://github.com/thanushsreeram/campus_backend)
+[![Live Vercel Frontend](https://img.shields.io/badge/Live%20Frontend-student--hakathon.vercel.app-000000?style=for-the-badge&logo=vercel)](https://student-hakathon.vercel.app)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-CampusHire-181717?style=for-the-badge&logo=github)](https://github.com/manishjhcssp-prog/CampusHire)
+[![Problem Statement ID: HACK-P410](https://img.shields.io/badge/Problem%20ID-HACK--P410-0ea5e9?style=for-the-badge&logo=target)](https://github.com/manishjhcssp-prog/CampusHire)
+[![Team: Team ByteCraft](https://img.shields.io/badge/Team-ByteCraft-10b981?style=for-the-badge&logo=users)](https://github.com/manishjhcssp-prog/CampusHire)
+[![Tests: 52 Passed](https://img.shields.io/badge/Tests-52%2F52%20Passed%20(100%25)-emerald?style=for-the-badge&logo=checkmarx)](https://github.com/manishjhcssp-prog/CampusHire)
+[![Stack: React 19 + Node.js 22 + SQLite](https://img.shields.io/badge/Stack-React%2019%20%7C%20Node%2022%20%7C%20SQLite-f59e0b?style=for-the-badge&logo=react)](https://github.com/manishjhcssp-prog/CampusHire)
 [![Demo Video: 1080p 60fps](https://img.shields.io/badge/Demo%20Video-Full%20HD%201080p-blueviolet?style=for-the-badge&logo=youtube)](file:///d:/student-hakathon/CampusHire_Official_Demo_Submission.mp4)
 
 ---
