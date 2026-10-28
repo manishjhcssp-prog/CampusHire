@@ -1,6 +1,7 @@
 # CampusHire — Intelligent College Placement & Recruitment Automation Portal
 
 [![Live Vercel Frontend](https://img.shields.io/badge/Live%20Frontend-student--hakathon.vercel.app-000000?style=for-the-badge&logo=vercel)](https://student-hakathon.vercel.app)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/manishjhcssp-prog/CampusHire)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-CampusHire-181717?style=for-the-badge&logo=github)](https://github.com/manishjhcssp-prog/CampusHire)
 [![Problem Statement ID: HACK-P410](https://img.shields.io/badge/Problem%20ID-HACK--P410-0ea5e9?style=for-the-badge&logo=target)](https://github.com/manishjhcssp-prog/CampusHire)
 [![Team: Team ByteCraft](https://img.shields.io/badge/Team-ByteCraft-10b981?style=for-the-badge&logo=users)](https://github.com/manishjhcssp-prog/CampusHire)
@@ -202,6 +203,17 @@ npm run dev
 ```
 
 Open your browser at: **`http://localhost:5173`**
+
+### 5. Deploy Backend to Render (1-Click or Blueprint)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/manishjhcssp-prog/CampusHire)
+
+The repository includes a pre-configured Render Blueprint (`render.yaml`):
+- **Blueprint Spec:** [`render.yaml`](render.yaml) (Node 22+, automatic database seeding, port binding, and health check).
+- **Service Name:** `campushire-backend`
+- **Root Directory:** `server`
+- **Build Command:** `npm install`
+- **Start Command:** `node src/scripts/seed.js && node server.js`
+- **Health Check Path:** `/api/health`
 
 ---
 

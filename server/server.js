@@ -11,11 +11,11 @@ async function startServer() {
     await initDatabase();
     console.log('Database schema initialized successfully.');
 
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`=======================================================`);
       console.log(` CampusHire API server is running on port ${PORT}`);
-      console.log(` Local URL: http://localhost:${PORT}`);
-      console.log(` Health Check: http://localhost:${PORT}/api/health`);
+      console.log(` Local URL: http://0.0.0.0:${PORT}`);
+      console.log(` Health Check: http://0.0.0.0:${PORT}/api/health`);
       console.log(`=======================================================`);
     });
   } catch (err) {
@@ -25,4 +25,3 @@ async function startServer() {
 }
 
 startServer();
-
