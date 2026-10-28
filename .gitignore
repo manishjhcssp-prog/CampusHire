@@ -29,3 +29,5 @@ audio/audio_list.txt
 *.njsproj
 *.sln
 *.sw?
+
+.vercel
