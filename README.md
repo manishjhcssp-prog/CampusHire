@@ -1,7 +1,7 @@
 # CampusHire — Intelligent College Placement & Recruitment Automation Portal
 
 [![Live Vercel Frontend](https://img.shields.io/badge/Live%20Frontend-student--hakathon.vercel.app-000000?style=for-the-badge&logo=vercel)](https://student-hakathon.vercel.app)
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/manishjhcssp-prog/CampusHire)
+[![Live Render Backend](https://img.shields.io/badge/Live%20Backend-campushire--backend.onrender.com-46E3B7?style=for-the-badge&logo=render)](https://campushire-backend-sgaq.onrender.com)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-CampusHire-181717?style=for-the-badge&logo=github)](https://github.com/manishjhcssp-prog/CampusHire)
 [![Problem Statement ID: HACK-P410](https://img.shields.io/badge/Problem%20ID-HACK--P410-0ea5e9?style=for-the-badge&logo=target)](https://github.com/manishjhcssp-prog/CampusHire)
 [![Team: Team ByteCraft](https://img.shields.io/badge/Team-ByteCraft-10b981?style=for-the-badge&logo=users)](https://github.com/manishjhcssp-prog/CampusHire)
