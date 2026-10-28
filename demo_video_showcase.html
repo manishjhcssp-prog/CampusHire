@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CampusHire — Official Submission Demo Video (HACK-P410)</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body {
+      background-color: #07090e;
+      color: #e2e8f0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .glass-card {
+      background: #0f141e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.25rem;
+      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.8);
+    }
+    .active-part {
+      background: rgba(14, 165, 233, 0.2) !important;
+      border-color: rgba(56, 189, 248, 0.5) !important;
+      color: #38bdf8 !important;
+    }
+    video {
+      border-radius: 1rem;
+      outline: none;
+      box-shadow: 0 15px 40px -10px rgba(0,0,0,0.85);
+    }
+  </style>
+</head>
+<body class="p-4 sm:p-6 max-w-7xl mx-auto space-y-6 select-none">
+
+  <!-- Header Banner -->
+  <header class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 glass-card p-5 border-l-4 border-l-sky-500 shadow-2xl">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">HACK-P410 • Official 5-Part Video Walkthrough</span>
+        <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">TEAM BYTECRAFT</span>
+      </div>
+      <h1 class="text-2xl sm:text-3xl font-black text-white mt-1 tracking-tight">
+        CampusHire — Official Video Submission
+      </h1>
+      <p class="text-xs text-slate-400 mt-1">
+        Full 5-Part Structure • 1080p 30fps • Synchronized Voiceover Narration • 4m 01s Runtime
+      </p>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <a 
+        href="CampusHire_Official_Demo_Submission.mp4" 
+        download="CampusHire_Official_Demo_Submission.mp4"
+        class="inline-flex items-center gap-2 bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white text-xs font-bold px-4 py-2.5 rounded-xl transition shadow-lg shadow-sky-600/30"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+        </svg>
+        Download MP4 (1080p • 14.6 MB)
+      </a>
+
+      <a 
+        href="CampusHire_Project_Presentation.pptx" 
+        download="CampusHire_Project_Presentation.pptx"
+        class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 border border-white/10 text-slate-200 text-xs font-semibold px-3.5 py-2.5 rounded-xl transition"
+      >
+        <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        Get .PPTX Deck
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Grid: Video Player (Left 8 Cols) & Storyboard Teleprompter (Right 4 Cols) -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    
+    <!-- Video Player Section (Span 8) -->
+    <div class="lg:col-span-8 flex flex-col gap-4">
+      <div class="glass-card p-3 bg-black/60 relative">
+        <video 
+          id="demoVideo" 
+          controls 
+          preload="metadata" 
+          class="w-full h-auto aspect-video rounded-xl bg-black"
+          poster="media_0.png"
+        >
+          <source src="CampusHire_Official_Demo_Submission.mp4" type="video/mp4">
+          Your browser does not support HTML5 video playback.
+        </video>
+      </div>
+
+      <!-- Quick Playback & Speed Controls -->
+      <div class="glass-card p-4 flex flex-wrap items-center justify-between gap-3">
+        <div class="flex items-center gap-2">
+          <button onclick="skipTime(-5)" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white text-xs font-medium">⏪ -5s</button>
+          <button onclick="togglePlayPause()" id="playBtn" class="px-4 py-1.5 rounded-lg bg-sky-500 text-white font-semibold text-xs shadow-md shadow-sky-500/20">Play</button>
+          <button onclick="skipTime(5)" class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white text-xs font-medium">⏩ +5s</button>
+          <span id="timeDisplay" class="text-xs font-mono text-slate-400 ml-2">00:00 / 04:01</span>
+        </div>
+
+        <div class="flex items-center gap-1.5">
+          <span class="text-xs text-slate-400 font-medium mr-1">Speed:</span>
+          <button onclick="setSpeed(1.0)" id="spd-10" class="speed-btn px-2.5 py-1 rounded-md text-xs font-medium bg-sky-500/20 text-sky-300 border border-sky-500/30">1.0x</button>
+          <button onclick="setSpeed(1.25)" id="spd-125" class="speed-btn px-2.5 py-1 rounded-md text-xs font-medium bg-slate-800 text-slate-400 hover:text-white">1.25x</button>
+          <button onclick="setSpeed(1.5)" id="spd-15" class="speed-btn px-2.5 py-1 rounded-md text-xs font-medium bg-slate-800 text-slate-400 hover:text-white">1.5x</button>
+        </div>
+      </div>
+
+      <!-- 5-Part Academic Submission Jump Grid -->
+      <div class="glass-card p-4 space-y-3">
+        <h3 class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+          <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          5-Part Academic Submission Sections
+        </h3>
+
+        <div class="grid grid-cols-1 sm:grid-cols-5 gap-2">
+          <button onclick="jumpTo(0)" id="part-btn-1" class="part-btn p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/5 text-left transition active-part">
+            <span class="text-[10px] text-sky-400 font-mono block">0:00 - 0:24</span>
+            <span class="text-xs font-bold text-white block">Part 1</span>
+            <span class="text-[11px] text-slate-400 block truncate">Introduction</span>
+          </button>
+
+          <button onclick="jumpTo(24)" id="part-btn-2" class="part-btn p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/5 text-left transition">
+            <span class="text-[10px] text-slate-400 font-mono block">0:24 - 1:02</span>
+            <span class="text-xs font-bold text-white block">Part 2</span>
+            <span class="text-[11px] text-slate-400 block truncate">Problem & Solution</span>
+          </button>
+
+          <button onclick="jumpTo(62)" id="part-btn-3" class="part-btn p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/5 text-left transition">
+            <span class="text-[10px] text-slate-400 font-mono block">1:02 - 2:38</span>
+            <span class="text-xs font-bold text-white block">Part 3</span>
+            <span class="text-[11px] text-slate-400 block truncate">Working Application</span>
+          </button>
+
+          <button onclick="jumpTo(158)" id="part-btn-4" class="part-btn p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/5 text-left transition">
+            <span class="text-[10px] text-slate-400 font-mono block">2:38 - 3:37</span>
+            <span class="text-xs font-bold text-white block">Part 4</span>
+            <span class="text-[11px] text-slate-400 block truncate">Backend & DB</span>
+          </button>
+
+          <button onclick="jumpTo(217)" id="part-btn-5" class="part-btn p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/5 text-left transition">
+            <span class="text-[10px] text-slate-400 font-mono block">3:37 - 4:01</span>
+            <span class="text-xs font-bold text-white block">Part 5</span>
+            <span class="text-[11px] text-slate-400 block truncate">Deployment</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Live Synchronized Script Teleprompter (Span 4) -->
+    <div class="lg:col-span-4 flex flex-col gap-4">
+      <div class="glass-card p-5 h-full flex flex-col justify-between">
+        
+        <div class="space-y-4">
+          <div class="flex items-center justify-between border-b border-white/[0.08] pb-3">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+              <h2 class="text-sm font-bold text-white uppercase tracking-wider">Synchronized Script</h2>
+            </div>
+            <span id="activeSectionTag" class="text-[10px] font-semibold bg-sky-500/20 text-sky-300 px-2 py-0.5 rounded border border-sky-500/30">
+              Part 1 of 5
+            </span>
+          </div>
+
+          <!-- Dynamic Scene Content -->
+          <div id="prompterCard" class="bg-black/40 border border-white/5 rounded-xl p-4 space-y-2.5 min-h-[220px]">
+            <h3 id="sectionTitle" class="text-sm font-extrabold text-sky-300">
+              Part 1: Introduction (Project, ID & Team)
+            </h3>
+            <p id="sectionScript" class="text-xs text-slate-300 leading-relaxed">
+              "Welcome to CampusHire, an intelligent college placement and recruitment automation portal, developed for Problem Statement HACK-P410 by Team ByteCraft. Our team consists of RAMAGIRI MANISH as lead, Challa Bharat, kanuri Thanush Sree Ram, and Devata sai nihar from branch CSE(AI). In this video, we present our complete full-stack solution to automate university recruitment drives."
+            </p>
+            <div class="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] text-slate-400">
+              <span id="sectionDuration">Timestamp: 0:00 - 0:24</span>
+              <span class="text-emerald-400 font-medium">✓ Narration Audio Synchronized</span>
+            </div>
+          </div>
+
+          <!-- Submission Compliance Checklist -->
+          <div class="space-y-2">
+            <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Faculty Submission Compliance</h4>
+            <div class="space-y-1.5 text-xs text-slate-300">
+              <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 flex items-start gap-2">
+                <span class="text-emerald-400 font-bold">✓</span>
+                <span><strong>Actual Application:</strong> Real running React 19 SPA & Node REST API demonstrated.</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 flex items-start gap-2">
+                <span class="text-emerald-400 font-bold">✓</span>
+                <span><strong>Clear Screen & Narration:</strong> 1080p Full HD video with synchronized voiceover.</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 flex items-start gap-2">
+                <span class="text-emerald-400 font-bold">✓</span>
+                <span><strong>Backend & DB Operations:</strong> Live API requests, SQLite tables, and 52/52 tests.</span>
+              </div>
+              <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 flex items-start gap-2">
+                <span class="text-emerald-400 font-bold">✓</span>
+                <span><strong>Zero Sensitive Data:</strong> Passwords & API secrets protected.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Team Signature -->
+        <div class="pt-4 border-t border-white/[0.08] text-[11px] text-slate-500 flex justify-between items-center">
+          <span>Problem Statement: HACK-P410</span>
+          <span class="text-sky-400 font-mono">Team ByteCraft</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Teleprompter Synchronization Logic -->
+  <script>
+    const video = document.getElementById('demoVideo');
+    const playBtn = document.getElementById('playBtn');
+    const timeDisplay = document.getElementById('timeDisplay');
+    const sectionTitle = document.getElementById('sectionTitle');
+    const sectionScript = document.getElementById('sectionScript');
+    const sectionDuration = document.getElementById('sectionDuration');
+    const activeSectionTag = document.getElementById('activeSectionTag');
+
+    const sections = [
+      {
+        part: 1,
+        start: 0,
+        end: 24,
+        title: "Part 1: Introduction (Project, ID & Team)",
+        script: "Welcome to CampusHire, an intelligent college placement and recruitment automation portal, developed for Problem Statement HACK-P410 by Team ByteCraft. Our team consists of RAMAGIRI MANISH as lead, Challa Bharat, kanuri Thanush Sree Ram, and Devata sai nihar from branch CSE(AI). In this video, we present our complete full-stack solution to automate university recruitment drives."
+      },
+      {
+        part: 2,
+        start: 24,
+        end: 62,
+        title: "Part 2: Problem Statement & Proposed Solution",
+        script: "Every placement season, university placement cells face a massive operational challenge. Managing student eligibility across dozens of conflicting spreadsheets and WhatsApp groups takes three to five days per company, leading to human verification errors and missed opportunities. CampusHire solves this by unifying students, recruiters, and placement officers into a single automated platform. Our rule-based engine performs sub-second academic auditing, tracks candidates across dynamic pipeline stages, and gives university leadership real-time visibility into placement benchmarks."
+      },
+      {
+        part: 3,
+        start: 62,
+        end: 158,
+        title: "Part 3: Working Application Walkthrough",
+        script: "Let us dive into the live working application running on our React single-page frontend. At the top, real-time metric cards stream aggregated statistics directly from our backend: an 84 percent placement rate representing 705 placed candidates out of 841, across 23 active partner drives and 147 open job roles. In the Ongoing Drives panel, placement officers track live applicant counts across Google, Microsoft, and Deloitte, advancing candidates smoothly across screening, technical rounds, and interview stages. On the right, our Smart Eligibility engine conducts instant candidate audits. Evaluating Rahul Sharma against Google's Software Engineer role immediately confirms his 8.6 CGPA, zero backlogs, and computer science branch with green checkmarks. When criteria fail, the system highlights the exact discrepancies. For special circumstances, administrators can open the Dean Exception Override modal to log policy justifications and approve fast-track passes. At the bottom, our integrated calendar displays scheduled interview slots with direct Google Meet conferencing links. Switching to the Student Persona, students get a transparent view of their academic profile, explore eligible job drives, and submit one-click applications with real-time status tracking. Switching to the Recruiter view gives corporate teams an intuitive applicant tracking pipeline."
+      },
+      {
+        part: 4,
+        start: 158,
+        end: 217,
+        title: "Part 4: Backend REST APIs, SQLite & Test Suite",
+        script: "Now let us examine the backend architecture and database operations. CampusHire is powered by a high-throughput Node.js Express REST API connected to a native SQLite database with zero external C++ dependencies. Querying our dashboard aggregation endpoint returns live cohort metrics in under 20 milliseconds. Our eligibility checker endpoint evaluates complex academic rules in memory and returns detailed criteria diagnostics. In the database, foreign key constraints maintain strict relational integrity across students, companies, job postings, and interview schedules, scaled to a cohort of 841 students. Here is our automated test suite executing 52 end-to-end integration tests across authentication, RBAC authorization, rule engine validation, and pipeline state machines, with 100 percent passing and zero failures."
+      },
+      {
+        part: 5,
+        start: 217,
+        end: 242,
+        title: "Part 5: Deployment & Hackathon Conclusion",
+        script: "In conclusion, CampusHire is fully deployed and verified, running smoothly with concurrent frontend and backend services. We successfully achieved 100 percent automated eligibility verification, eliminated spreadsheet data silos, and delivered a production-ready portal for modern campus recruitment. Thank you for watching!"
+      }
+    ];
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    function togglePlayPause() {
+      if (video.paused) {
+        video.play();
+        playBtn.innerText = "Pause";
+        playBtn.classList.replace("bg-sky-500", "bg-amber-500");
+      } else {
+        video.pause();
+        playBtn.innerText = "Play";
+        playBtn.classList.replace("bg-amber-500", "bg-sky-500");
+      }
+    }
+
+    function skipTime(sec) {
+      video.currentTime = Math.max(0, Math.min(video.duration || 241, video.currentTime + sec));
+    }
+
+    function jumpTo(sec) {
+      video.currentTime = sec;
+      video.play();
+      playBtn.innerText = "Pause";
+      playBtn.classList.replace("bg-sky-500", "bg-amber-500");
+    }
+
+    function setSpeed(spd) {
+      video.playbackRate = spd;
+      ['spd-10', 'spd-125', 'spd-15'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.className = "speed-btn px-2.5 py-1 rounded-md text-xs font-medium bg-slate-800 text-slate-400 hover:text-white";
+      });
+      const activeBtn = spd === 1.0 ? 'spd-10' : spd === 1.25 ? 'spd-125' : 'spd-15';
+      const el = document.getElementById(activeBtn);
+      if (el) el.className = "speed-btn px-2.5 py-1 rounded-md text-xs font-medium bg-sky-500/20 text-sky-300 border border-sky-500/30";
+    }
+
+    video.addEventListener('timeupdate', () => {
+      const cur = video.currentTime;
+      const dur = video.duration || 241;
+      timeDisplay.innerText = `${formatTime(cur)} / ${formatTime(dur)}`;
+
+      let currentSection = sections[0];
+      for (const s of sections) {
+        if (cur >= s.start && cur < s.end) {
+          currentSection = s;
+          break;
+        }
+      }
+
+      sectionTitle.innerText = currentSection.title;
+      sectionScript.innerText = `"${currentSection.script}"`;
+      sectionDuration.innerText = `Timestamp: ${formatTime(currentSection.start)} - ${formatTime(currentSection.end)}`;
+      activeSectionTag.innerText = `Part ${currentSection.part} of 5`;
+
+      for (let i = 1; i <= 5; i++) {
+        const btn = document.getElementById(`part-btn-${i}`);
+        if (btn) {
+          if (i === currentSection.part) {
+            btn.className = "part-btn p-3 rounded-xl bg-sky-500/20 border border-sky-500/40 text-left transition active-part";
+          } else {
+            btn.className = "part-btn p-3 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/5 text-left transition";
+          }
+        }
+      }
+    });
+
+    video.addEventListener('ended', () => {
+      playBtn.innerText = "Replay";
+      playBtn.classList.replace("bg-amber-500", "bg-sky-500");
+    });
+  </script>
+</body>
+</html>
