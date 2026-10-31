@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusHire — Project Presentation (HACK-P410)</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    
+    body {
+      background-color: #07090e;
+      color: #f1f5f9;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .slide-card {
+      background: #0f141e;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 1.25rem;
+      box-shadow: 0 20px 50px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    .glass-surface {
+      background: rgba(20, 26, 36, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .active-dot {
+      background-color: #0ea5e9 !important;
+      width: 2rem !important;
+    }
+
+    /* Print to PDF Styling */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .slide-container {
+        display: block !important;
+        page-break-after: always;
+        height: 100vh;
+        border: none !important;
+        box-shadow: none !important;
+        background: #0f141e !important;
+        color: white !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between p-3 sm:p-6 select-none">
+
+  <!-- TOP HEADER / TOOLBAR -->
+  <header class="no-print max-w-7xl w-full mx-auto flex flex-wrap items-center justify-between gap-3 glass-surface p-4 rounded-2xl mb-4 shadow-xl">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-sky-600 to-emerald-500 flex items-center justify-center shadow-lg shadow-sky-500/20">
+        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 14l9-5-9-5-9 5 9 5z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="flex items-center gap-2">
+          <h1 class="text-base font-extrabold text-white tracking-tight">CampusHire</h1>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/10 text-sky-400 border border-sky-500/20">HACK-P410</span>
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hidden sm:inline">TEAM BYTECRAFT</span>
+        </div>
+        <p class="text-xs text-slate-400">Intelligent College Placement & Recruitment Automation Portal</p>
+      </div>
+    </div>
+
+    <!-- Actions & Slide Progress -->
+    <div class="flex items-center gap-2.5">
+      <span id="slideIndicator" class="px-3 py-1.5 rounded-xl bg-slate-800 text-xs font-mono font-semibold text-slate-200 border border-white/5">
+        Slide <span id="currentSlideNum" class="text-sky-400">1</span> of 12
+      </span>
+
+      <!-- Download PPTX Button -->
+      <a 
+        href="CampusHire_Project_Presentation.pptx" 
+        download="CampusHire_Project_Presentation.pptx"
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-sky-600 to-sky-500 hover:from-sky-500 hover:to-sky-400 text-white text-xs font-semibold shadow-lg shadow-sky-600/20 transition"
+        title="Download actual Microsoft PowerPoint presentation file (.pptx)"
+      >
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+        </svg>
+        <span class="hidden sm:inline">Download</span> .PPTX
+      </a>
+
+      <!-- Speaker Notes Toggle -->
+      <button 
+        onclick="toggleNotes()" 
+        id="notesBtn"
+        class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-medium border border-white/5 transition flex items-center gap-1.5"
+        title="Toggle Speaker Notes (Shortcut: S)"
+      >
+        <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+        </svg>
+        <span class="hidden md:inline">Notes [S]</span>
+      </button>
+
+      <!-- Fullscreen Toggle -->
+      <button 
+        onclick="toggleFullscreen()" 
+        class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-medium border border-white/5 transition"
+        title="Fullscreen Mode (Shortcut: F)"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN PRESENTATION STAGE -->
+  <main id="slideStage" class="max-w-7xl w-full mx-auto flex-1 flex flex-col justify-center">
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 1: TITLE SLIDE -->
+    <!-- ======================================================== -->
+    <div id="slide-1" class="slide-container slide-card p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[580px]">
+      <!-- Background Ambient Glow -->
+      <div class="absolute -top-32 -left-32 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Top Tagline -->
+      <div class="relative z-10 flex flex-wrap items-center justify-between gap-2 border-b border-white/[0.06] pb-4">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="text-xs font-mono font-bold text-sky-400 tracking-wider uppercase">Problem Statement ID: HACK-P410</span>
+        </div>
+        <span class="text-xs font-medium text-slate-400">Subject: Full-Stack Web Development & Campus Placement Automation</span>
+      </div>
+
+      <!-- Middle: Hero Content -->
+      <div class="relative z-10 my-auto py-6 space-y-4">
+        <div class="inline-block px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/20 text-sky-300 text-xs font-semibold">
+          Capstone Software Engineering Project 2026
+        </div>
+        <h2 class="text-4xl sm:text-5xl font-black text-white tracking-tight leading-tight">
+          CampusHire
+        </h2>
+        <p class="text-lg sm:text-xl text-emerald-400 font-semibold max-w-3xl">
+          Intelligent College Placement & Recruitment Automation Portal
+        </p>
+        <p class="text-sm text-slate-400 max-w-2xl leading-relaxed">
+          An enterprise-grade, full-stack recruitment platform unifying Students, Training & Placement Officers (TPOs), and Corporate Recruiters through automated eligibility auditing, policy overrides, and dynamic applicant tracking.
+        </p>
+
+        <!-- Team Information Grid -->
+        <div class="pt-4">
+          <div class="text-xs font-bold text-sky-400 tracking-wider uppercase mb-3 flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            Project Team: Team ByteCraft
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/5 space-y-1">
+              <span class="text-xs font-extrabold text-white block">1. RAMAGIRI MANISH (Lead)</span>
+              <span class="text-[11px] font-mono text-sky-400 block">Roll: 25MVCAIR0069</span>
+              <span class="text-[11px] text-slate-400 block">Branch: CSE(AI)</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/5 space-y-1">
+              <span class="text-xs font-extrabold text-white block">2. Challa Bharat</span>
+              <span class="text-[11px] font-mono text-sky-400 block">Roll: 25MVCAIR0020</span>
+              <span class="text-[11px] text-slate-400 block">Branch: CSE(AI)</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/5 space-y-1">
+              <span class="text-xs font-extrabold text-white block">3. kanuri Thanush Sree Ram</span>
+              <span class="text-[11px] font-mono text-sky-400 block">Roll: 25MVCAIR0059</span>
+              <span class="text-[11px] text-slate-400 block">Branch: CSE(AI)</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/5 space-y-1">
+              <span class="text-xs font-extrabold text-white block">4. Devata sai nihar</span>
+              <span class="text-[11px] font-mono text-sky-400 block">Roll: 25MVCAIR0030</span>
+              <span class="text-[11px] text-slate-400 block">Branch: CSE(AI)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Status -->
+      <div class="relative z-10 flex items-center justify-between text-xs text-slate-500 border-t border-white/[0.06] pt-4">
+        <span>CampusHire Enterprise Portal v2.0</span>
+        <span class="text-emerald-400 font-medium">● 52/52 Tests Verified • Production Ready</span>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 2: PROBLEM STATEMENT -->
+    <!-- ======================================================== -->
+    <div id="slide-2" class="slide-container slide-card p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[580px] hidden">
+      <div class="border-b border-white/[0.06] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">Context & Urgency</span>
+          <h2 class="text-2xl font-black text-white mt-0.5">Slide 2: Problem Statement & Stakeholder Impact</h2>
+        </div>
+        <span class="px-2.5 py-1 rounded-md text-[11px] bg-red-500/10 text-red-400 border border-red-500/20 font-bold">CRITICAL INSTITUTIONAL PROBLEM</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto py-4">
+        <!-- Left 6 Cols: The Problem -->
+        <div class="lg:col-span-6 space-y-3">
+          <h3 class="text-sm font-bold text-red-400 uppercase tracking-wider flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            The Operational Bottlenecks
+          </h3>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 space-y-1">
+            <h4 class="text-xs font-bold text-white flex items-center gap-1.5"><span class="text-red-400 font-black">✕</span> Spreadsheet Chaos & Data Leaks</h4>
+            <p class="text-xs text-slate-400">Campus placement cells manually manage 100+ conflicting Excel spreadsheets, CSVs, and WhatsApp groups, risking data corruption, missing registrations, and privacy breaches.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 space-y-1">
+            <h4 class="text-xs font-bold text-white flex items-center gap-1.5"><span class="text-red-400 font-black">✕</span> Manual Eligibility Verification Delays</h4>
+            <p class="text-xs text-slate-400">Manually matching thousands of students against company criteria (CGPA cutoff, active backlogs, branches, 10th/12th percentages) takes 3–5 days per company, causing recruitment delays.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/60 border border-white/5 space-y-1">
+            <h4 class="text-xs font-bold text-white flex items-center gap-1.5"><span class="text-red-400 font-black">✕</span> Zero Real-Time Visibility</h4>
+            <p class="text-xs text-slate-400">Students remain anxious without live application tracking; recruiters struggle to track interview pipelines; placement officers have no real-time cohort analytics.</p>
+          </div>
+        </div>
+
+        <!-- Right 6 Cols: Strategic Importance & Target Users -->
+        <div class="lg:col-span-6 space-y-4">
+          <h3 class="text-sm font-bold text-sky-400 uppercase tracking-wider flex items-center gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            Target Stakeholders & Why It Matters
+          </h3>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+            <div class="p-3 rounded-xl bg-sky-950/30 border border-sky-500/20 space-y-1 text-center">
+              <span class="text-xl">🎓</span>
+              <h4 class="text-xs font-bold text-sky-300">Students</h4>
+              <p class="text-[11px] text-slate-400">Instant eligibility check, 1-click apply, interview calendar.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20 space-y-1 text-center">
+              <span class="text-xl">🏢</span>
+              <h4 class="text-xs font-bold text-emerald-300">Recruiters</h4>
+              <p class="text-[11px] text-slate-400">Pre-vetted talent, stage kanban, scheduled interview slots.</p>
+            </div>
+            <div class="p-3 rounded-xl bg-purple-950/30 border border-purple-500/20 space-y-1 text-center">
+              <span class="text-xl">🏛️</span>
+              <h4 class="text-xs font-bold text-purple-300">TPO Officers</h4>
+              <p class="text-[11px] text-slate-400">Dean policy overrides, cohort analytics, live audit logs.</p>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/10 space-y-1.5">
+            <span class="text-xs font-bold text-amber-300 uppercase tracking-wide">💡 Institutional Importance:</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              University NIRF/NAAC accreditations and admissions heavily hinge on verified placement percentages. A single verification error can cost a deserving student a life-changing Tier-1 opportunity or damage the university's corporate relationships.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-500 border-t border-white/[0.06] pt-3 flex justify-between">
+        <span>CampusHire — Problem Formulation</span>
+        <span>Slide 2 / 12</span>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 3: OBJECTIVES AND PROPOSED SOLUTION -->
+    <!-- ======================================================== -->
+    <div id="slide-3" class="slide-container slide-card p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[580px] hidden">
+      <div class="border-b border-white/[0.06] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">Strategic Blueprint</span>
+          <h2 class="text-2xl font-black text-white mt-0.5">Slide 3: Objectives & Proposed Solution</h2>
+        </div>
+        <span class="px-2.5 py-1 rounded-md text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">100% AUTOMATED WORKFLOW</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto py-4">
+        <!-- Left: Project Objectives (6 Cols) -->
+        <div class="lg:col-span-6 space-y-3">
+          <h3 class="text-xs font-bold text-sky-400 uppercase tracking-wider">Core Objectives</h3>
+
+          <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-white/5">
+            <span class="w-6 h-6 rounded-lg bg-sky-500/20 text-sky-300 flex items-center justify-center font-bold text-xs shrink-0">1</span>
+            <div>
+              <h4 class="text-xs font-bold text-white">Sub-Second Eligibility Verification</h4>
+              <p class="text-[11px] text-slate-400">Implement a deterministic rule engine that audits CGPA, active backlogs, and branch eligibility in under 25 milliseconds.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-white/5">
+            <span class="w-6 h-6 rounded-lg bg-sky-500/20 text-sky-300 flex items-center justify-center font-bold text-xs shrink-0">2</span>
+            <div>
+              <h4 class="text-xs font-bold text-white">Role-Based Access Control (RBAC)</h4>
+              <p class="text-[11px] text-slate-400">Enforce strict data boundaries and views across Students, Recruiters, and Administrators using JWT auth tokens.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-white/5">
+            <span class="w-6 h-6 rounded-lg bg-sky-500/20 text-sky-300 flex items-center justify-center font-bold text-xs shrink-0">3</span>
+            <div>
+              <h4 class="text-xs font-bold text-white">State Machine Application Tracking</h4>
+              <p class="text-[11px] text-slate-400">Track candidates across formalized pipeline states: Submitted ➔ Shortlisted ➔ Tech Round ➔ Interview ➔ Selected.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-900/60 border border-white/5">
+            <span class="w-6 h-6 rounded-lg bg-sky-500/20 text-sky-300 flex items-center justify-center font-bold text-xs shrink-0">4</span>
+            <div>
+              <h4 class="text-xs font-bold text-white">Real-Time Cohort Analytics</h4>
+              <p class="text-[11px] text-slate-400">Stream live placement percentages, branch distributions, and company offer volumes directly from backend databases.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Proposed Solution (6 Cols) -->
+        <div class="lg:col-span-6 space-y-3">
+          <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">The Proposed Solution: CampusHire</h3>
+
+          <div class="p-4 rounded-xl bg-gradient-to-br from-slate-900 to-sky-950/40 border border-sky-500/30 space-y-2">
+            <span class="text-xs font-bold text-sky-300 flex items-center gap-1.5">⚡ Unified Full-Stack Platform</span>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              CampusHire replaces fragmented tools with a centralized, single-page application dashboard powered by a resilient Node/Express REST API and relational SQLite database.
+            </p>
+          </div>
+
+          <div class="space-y-2">
+            <div class="p-3 rounded-xl bg-slate-900/60 border border-white/5 flex items-center gap-3">
+              <span class="text-emerald-400 text-lg">🛡️</span>
+              <div>
+                <h4 class="text-xs font-bold text-white">Dean-Level Exception Override System</h4>
+                <p class="text-[11px] text-slate-400">Legitimizes borderline candidate approvals with mandatory digital policy justification logs.</p>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/60 border border-white/5 flex items-center gap-3">
+              <span class="text-sky-400 text-lg">📅</span>
+              <div>
+                <h4 class="text-xs font-bold text-white">Synchronized Interview Scheduler</h4>
+                <p class="text-[11px] text-slate-400">Integrated calendar with Google Meet video links, real-time candidate tags, and agenda views.</p>
+              </div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/60 border border-white/5 flex items-center gap-3">
+              <span class="text-amber-400 text-lg">🎯</span>
+              <div>
+                <h4 class="text-xs font-bold text-white">1-Click Student Application Flow</h4>
+                <p class="text-[11px] text-slate-400">Students see live criteria checks before applying and track their status in real time.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-500 border-t border-white/[0.06] pt-3 flex justify-between">
+        <span>CampusHire — Objectives & Solution</span>
+        <span>Slide 3 / 12</span>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 4: FEATURES IMPLEMENTED -->
+    <!-- ======================================================== -->
+    <div id="slide-4" class="slide-container slide-card p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[580px] hidden">
+      <div class="border-b border-white/[0.06] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">Functional Capabilities</span>
+          <h2 class="text-2xl font-black text-white mt-0.5">Slide 4: Major Working Features Implemented</h2>
+        </div>
+        <span class="px-2.5 py-1 rounded-md text-[11px] bg-sky-500/10 text-sky-400 border border-sky-500/20 font-bold">ALL 8 MODULES TESTED & ACTIVE</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 my-auto py-3">
+        <!-- Feature 1 -->
+        <div class="p-4 rounded-xl bg-slate-900/70 border border-white/5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xl">📊</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">LIVE METRICS</span>
+          </div>
+          <h3 class="text-xs font-bold text-white">Real-Time Top Metric Cards</h3>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Real-time backend queries aggregate 84% placement rate (705 of 841 placed), 23 active company drives, and 147 open job roles with progress bars.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="p-4 rounded-xl bg-slate-900/70 border border-white/5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xl">⚖️</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/10 text-sky-400 border border-sky-500/20">AUTOMATED</span>
+          </div>
+          <h3 class="text-xs font-bold text-white">Smart Academic Eligibility Audit</h3>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Rule-based evaluator checking CGPA cutoff, active backlogs, and branch eligibility, displaying green checkmarks and red failure pills.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="p-4 rounded-xl bg-slate-900/70 border border-white/5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xl">📝</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">POLICY OVERRIDE</span>
+          </div>
+          <h3 class="text-xs font-bold text-white">Dean Exception Override Modal</h3>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Administrative modal allowing placement officers to override eligibility criteria with signed policy exception notes and Fast-Track Pass generation.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="p-4 rounded-xl bg-slate-900/70 border border-white/5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xl">🔄</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">STATE MACHINE</span>
+          </div>
+          <h3 class="text-xs font-bold text-white">Interactive Pipeline Progression</h3>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Stage badges (Screening, Tech Round, Interview, Offer) that advance candidates and lock terminal states to prevent invalid transitions.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="p-4 rounded-xl bg-slate-900/70 border border-white/5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xl">👥</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sky-500/10 text-sky-400 border border-sky-500/20">MULTI-ROLE RBAC</span>
+          </div>
+          <h3 class="text-xs font-bold text-white">1-Click Persona Switching</h3>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Seamless toggle between Administrator, Recruiter, and Student personas with JWT authentication and endpoint access guards.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="p-4 rounded-xl bg-slate-900/70 border border-white/5 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xl">📅</span>
+            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20">SYNCHRONIZED</span>
+          </div>
+          <h3 class="text-xs font-bold text-white">Interview Slots & Mini Calendar</h3>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Upcoming interview slot list with Google Meet video links, time stamps (@ 11:30 AM, 1:30 PM), and active date filtering.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-500 border-t border-white/[0.06] pt-3 flex justify-between">
+        <span>CampusHire — Implemented Features</span>
+        <span>Slide 4 / 12</span>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 5: TECHNOLOGY STACK -->
+    <!-- ======================================================== -->
+    <div id="slide-5" class="slide-container slide-card p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[580px] hidden">
+      <div class="border-b border-white/[0.06] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">Engineering Architecture</span>
+          <h2 class="text-2xl font-black text-white mt-0.5">Slide 5: Comprehensive Technology Stack</h2>
+        </div>
+        <span class="px-2.5 py-1 rounded-md text-[11px] bg-purple-500/10 text-purple-400 border border-purple-500/20 font-bold">ZERO EXTERNAL C++ LIBS</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 my-auto py-4">
+        <!-- Frontend -->
+        <div class="p-5 rounded-xl bg-slate-900/80 border border-sky-500/20 space-y-3">
+          <div class="flex items-center gap-2 text-sky-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <h3 class="text-xs font-extrabold uppercase tracking-wider">Frontend Layer</h3>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5">
+              <span class="font-bold text-white block">React 19 (SPA)</span>
+              <span class="text-[11px] text-slate-400">Modern component-driven declarative UI</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5">
+              <span class="font-bold text-white block">Tailwind CSS v4</span>
+              <span class="text-[11px] text-slate-400">Dark slate (#0e1219) & glassmorphism</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5">
+              <span class="font-bold text-white block">Lucide React & Recharts</span>
+              <span class="text-[11px] text-slate-400">Crisp SVG icons & placement charts</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5">
+              <span class="font-bold text-white block">Vite 6 Fast Bundler</span>
+              <span class="text-[11px] text-slate-400">Sub-second Hot Module Replacement</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Backend -->
+        <div class="p-5 rounded-xl bg-slate-900/80 border border-emerald-500/20 space-y-3">
+          <div class="flex items-center gap-2 text-emerald-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>
+            <h3 class="text-xs font-extrabold uppercase tracking-wider">Backend REST API</h3>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5">
+              <span class="font-bold text-white block">Node.js (v22+)</span>
+              <span class="text-[11px] text-slate-400">Asynchronous high-throughput event loop</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5">
+              <span class="font-bold text-white block">Express.js Framework</span>
+              <span class="text-[11px] text-slate-400">Modular routers, error handling, CORS</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5">
+              <span class="font-bold text-white block">JSON Web Tokens (JWT)</span>
+              <span class="text-[11px] text-slate-400">Cryptographically signed bearer tokens</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5">
+              <span class="font-bold text-white block">Bcryptjs Credential Vault</span>
+              <span class="text-[11px] text-slate-400">Salted password hashing (Admin@123)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Database & Tooling -->
+        <div class="p-5 rounded-xl bg-slate-900/80 border border-amber-500/20 space-y-3">
+          <div class="flex items-center gap-2 text-amber-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7zm0 5c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3m-16-5c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3"/></svg>
+            <h3 class="text-xs font-extrabold uppercase tracking-wider">Database & DevOps</h3>
+          </div>
+          <div class="space-y-2 text-xs">
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5">
+              <span class="font-bold text-white block">Native SQLite (node:sqlite)</span>
+              <span class="text-[11px] text-slate-400">Zero native build tools, WAL mode</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5">
+              <span class="font-bold text-white block">Puppeteer Core + CDP</span>
+              <span class="text-[11px] text-slate-400">Chrome DevTools Protocol screencasting</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5">
+              <span class="font-bold text-white block">FFmpeg H.264 Encoder</span>
+              <span class="text-[11px] text-slate-400">Full HD 1080p 30fps web rendering</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-black/40 border border-white/5">
+              <span class="font-bold text-white block">Git & GitHub</span>
+              <span class="text-[11px] text-slate-400">Version control & automated seeders</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-500 border-t border-white/[0.06] pt-3 flex justify-between">
+        <span>CampusHire — Tech Stack</span>
+        <span>Slide 5 / 12</span>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 6: SYSTEM ARCHITECTURE -->
+    <!-- ======================================================== -->
+    <div id="slide-6" class="slide-container slide-card p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[580px] hidden">
+      <div class="border-b border-white/[0.06] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">Data Flow & Infrastructure</span>
+          <h2 class="text-2xl font-black text-white mt-0.5">Slide 6: Multi-Tier System Architecture</h2>
+        </div>
+        <span class="px-2.5 py-1 rounded-md text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">CLEAN SEPARATION OF CONCERNS</span>
+      </div>
+
+      <div class="space-y-3 my-auto py-3">
+        <!-- Layer 1: Client -->
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border-l-4 border-l-sky-500 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div class="space-y-0.5">
+            <span class="text-xs font-bold text-sky-400 uppercase tracking-wider">1. Presentation Tier (React SPA Client)</span>
+            <p class="text-xs text-slate-300">Overview Dashboard • Ongoing Drives Pipeline • Smart Eligibility Audit • Role Switcher (Admin/Recruiter/Student)</p>
+          </div>
+          <span class="text-[10px] font-mono text-slate-400 bg-black/40 px-2 py-1 rounded border border-white/5">Vite @ Port 5173</span>
+        </div>
+
+        <!-- Connection Arrow -->
+        <div class="flex justify-center text-slate-500 text-xs font-mono">
+          <span>↓ JSON REST Requests with Bearer JWT Authorization Tokens ↓</span>
+        </div>
+
+        <!-- Layer 2: API Gateway -->
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border-l-4 border-l-emerald-500 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div class="space-y-0.5">
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider">2. API Gateway & Security Middleware</span>
+            <p class="text-xs text-slate-300">CORS Handshake • JWT Verification Middleware • Role Guards (Admin / Recruiter / Student) • Unified Error Envelope</p>
+          </div>
+          <span class="text-[10px] font-mono text-slate-400 bg-black/40 px-2 py-1 rounded border border-white/5">Express @ Port 5000</span>
+        </div>
+
+        <!-- Connection Arrow -->
+        <div class="flex justify-center text-slate-500 text-xs font-mono">
+          <span>↓ Internal Controller Routing & Deterministic Logic Invocation ↓</span>
+        </div>
+
+        <!-- Layer 3: Business Logic -->
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border-l-4 border-l-amber-500 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div class="space-y-0.5">
+            <span class="text-xs font-bold text-amber-400 uppercase tracking-wider">3. Business Logic & Automated Engines</span>
+            <p class="text-xs text-slate-300">Rule-Based Eligibility Checker • Dean Exception Audit Logger • Application State Machine • Cohort Placement Aggregator</p>
+          </div>
+          <span class="text-[10px] font-mono text-slate-400 bg-black/40 px-2 py-1 rounded border border-white/5">Sub-25ms Execution</span>
+        </div>
+
+        <!-- Connection Arrow -->
+        <div class="flex justify-center text-slate-500 text-xs font-mono">
+          <span>↓ Parameterized SQL Statements & Atomic Transactions ↓</span>
+        </div>
+
+        <!-- Layer 4: Data Tier -->
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border-l-4 border-l-purple-500 border border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div class="space-y-0.5">
+            <span class="text-xs font-bold text-purple-400 uppercase tracking-wider">4. Data Persistence & Cohort Storage</span>
+            <p class="text-xs text-slate-300">Native SQLite (node:sqlite) • Relational Integrity with Foreign Keys • WAL Mode • Pre-seeded 841 Student Cohort</p>
+          </div>
+          <span class="text-[10px] font-mono text-slate-400 bg-black/40 px-2 py-1 rounded border border-white/5">Zero C++ Addons</span>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-500 border-t border-white/[0.06] pt-3 flex justify-between">
+        <span>CampusHire — Architecture Diagram</span>
+        <span>Slide 6 / 12</span>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 7: BACKEND IMPLEMENTATION -->
+    <!-- ======================================================== -->
+    <div id="slide-7" class="slide-container slide-card p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[580px] hidden">
+      <div class="border-b border-white/[0.06] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">API Implementation</span>
+          <h2 class="text-2xl font-black text-white mt-0.5">Slide 7: Backend REST Endpoints & Logic Rules</h2>
+        </div>
+        <span class="px-2.5 py-1 rounded-md text-[11px] bg-sky-500/10 text-sky-400 border border-sky-500/20 font-bold">RESTFUL & RBAC PROTECTED</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto py-3">
+        <!-- Left: API Endpoints Table (7 Cols) -->
+        <div class="lg:col-span-7 space-y-2">
+          <h3 class="text-xs font-bold text-sky-400 uppercase tracking-wider">Core REST Endpoints</h3>
+          <div class="overflow-hidden rounded-xl border border-white/10 bg-black/40">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-slate-800 text-slate-300 font-semibold border-b border-white/10">
+                <tr>
+                  <th class="p-2.5">Method</th>
+                  <th class="p-2.5">Endpoint</th>
+                  <th class="p-2.5">Purpose</th>
+                  <th class="p-2.5">Access</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-white/5 text-slate-300 font-mono text-[11px]">
+                <tr>
+                  <td class="p-2 text-emerald-400 font-bold">POST</td>
+                  <td class="p-2">/api/auth/login</td>
+                  <td class="p-2 font-sans text-slate-400">Issue JWT bearer token</td>
+                  <td class="p-2 font-sans text-sky-400">Public</td>
+                </tr>
+                <tr>
+                  <td class="p-2 text-sky-400 font-bold">GET</td>
+                  <td class="p-2">/api/jobs</td>
+                  <td class="p-2 font-sans text-slate-400">List active drives & roles</td>
+                  <td class="p-2 font-sans text-slate-300">All Auth</td>
+                </tr>
+                <tr>
+                  <td class="p-2 text-sky-400 font-bold">GET</td>
+                  <td class="p-2">/api/jobs/:id/check-eligibility/:sid</td>
+                  <td class="p-2 font-sans text-slate-400">Sub-second audit check</td>
+                  <td class="p-2 font-sans text-slate-300">Student/Admin</td>
+                </tr>
+                <tr>
+                  <td class="p-2 text-emerald-400 font-bold">POST</td>
+                  <td class="p-2">/api/applications</td>
+                  <td class="p-2 font-sans text-slate-400">1-Click student apply</td>
+                  <td class="p-2 font-sans text-emerald-400">Student</td>
+                </tr>
+                <tr>
+                  <td class="p-2 text-amber-400 font-bold">POST</td>
+                  <td class="p-2">/api/applications/:id/override</td>
+                  <td class="p-2 font-sans text-slate-400">Dean policy exception</td>
+                  <td class="p-2 font-sans text-amber-400">Admin Only</td>
+                </tr>
+                <tr>
+                  <td class="p-2 text-purple-400 font-bold">PATCH</td>
+                  <td class="p-2">/api/applications/:id/status</td>
+                  <td class="p-2 font-sans text-slate-400">Advance pipeline stage</td>
+                  <td class="p-2 font-sans text-purple-400">Recruiter/Admin</td>
+                </tr>
+                <tr>
+                  <td class="p-2 text-sky-400 font-bold">GET</td>
+                  <td class="p-2">/api/admin/dashboard-stats</td>
+                  <td class="p-2 font-sans text-slate-400">Live 84% cohort metrics</td>
+                  <td class="p-2 font-sans text-amber-400">Admin Only</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Right: Business Logic Code & Validation (5 Cols) -->
+        <div class="lg:col-span-5 space-y-2.5">
+          <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Business Logic & Validation Rules</h3>
+
+          <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 space-y-1">
+            <span class="text-xs font-bold text-white block">1. Declarative Eligibility Formula:</span>
+            <div class="p-2 rounded bg-black/60 font-mono text-[10px] text-sky-300 leading-normal">
+              isEligible = (student.cgpa &gt;= job.min_cgpa) &amp;&amp;<br>
+              &nbsp;&nbsp;(student.backlogs &lt;= job.max_backlogs) &amp;&amp;<br>
+              &nbsp;&nbsp;job.branches.includes(student.branch) &amp;&amp;<br>
+              &nbsp;&nbsp;(new Date() &lt; new Date(job.deadline))
+            </div>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 space-y-1">
+            <span class="text-xs font-bold text-white block">2. State Machine Integrity Guard:</span>
+            <p class="text-[11px] text-slate-400">Prevents backwards status regressions and rejects withdrawals for candidates already in "selected" state with 400 Bad Request.</p>
+          </div>
+
+          <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 space-y-1">
+            <span class="text-xs font-bold text-white block">3. Standard Error Envelope:</span>
+            <p class="text-[11px] text-slate-400">All responses follow `{ success: boolean, message: string, data?: any }` to guarantee seamless client parsing.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-500 border-t border-white/[0.06] pt-3 flex justify-between">
+        <span>CampusHire — Backend Implementation</span>
+        <span>Slide 7 / 12</span>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 8: DATABASE DESIGN -->
+    <!-- ======================================================== -->
+    <div id="slide-8" class="slide-container slide-card p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[580px] hidden">
+      <div class="border-b border-white/[0.06] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">Relational Data Architecture</span>
+          <h2 class="text-2xl font-black text-white mt-0.5">Slide 8: Database Design & Entity Schema</h2>
+        </div>
+        <span class="px-2.5 py-1 rounded-md text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">RELATIONAL INTEGRITY (WAL)</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5 my-auto py-3">
+        <!-- Table: USERS -->
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-sky-500/20 space-y-1.5 font-mono text-[11px]">
+          <div class="flex items-center justify-between border-b border-white/10 pb-1 font-sans">
+            <span class="font-bold text-sky-400">TABLE: users</span>
+            <span class="text-[10px] text-slate-500">Auth & Roles</span>
+          </div>
+          <div class="text-slate-300 space-y-0.5">
+            <div class="text-emerald-400 font-bold">🔑 id: INTEGER PRIMARY KEY</div>
+            <div>• email: TEXT UNIQUE</div>
+            <div>• password_hash: TEXT</div>
+            <div>• role: TEXT (admin/student/recruiter)</div>
+            <div>• created_at: DATETIME</div>
+          </div>
+        </div>
+
+        <!-- Table: STUDENTS -->
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-emerald-500/20 space-y-1.5 font-mono text-[11px]">
+          <div class="flex items-center justify-between border-b border-white/10 pb-1 font-sans">
+            <span class="font-bold text-emerald-400">TABLE: students</span>
+            <span class="text-[10px] text-slate-500">Academic Cohort</span>
+          </div>
+          <div class="text-slate-300 space-y-0.5">
+            <div class="text-emerald-400 font-bold">🔑 id: INTEGER PRIMARY KEY</div>
+            <div class="text-sky-300">⚓ user_id: INT REFERENCES users</div>
+            <div>• full_name, roll_number: TEXT</div>
+            <div>• branch: TEXT (CSE, IT, ECE...)</div>
+            <div>• cgpa: REAL, active_backlogs: INT</div>
+            <div>• placement_status: TEXT</div>
+          </div>
+        </div>
+
+        <!-- Table: COMPANIES -->
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-purple-500/20 space-y-1.5 font-mono text-[11px]">
+          <div class="flex items-center justify-between border-b border-white/10 pb-1 font-sans">
+            <span class="font-bold text-purple-400">TABLE: companies</span>
+            <span class="text-[10px] text-slate-500">Corporate Partners</span>
+          </div>
+          <div class="text-slate-300 space-y-0.5">
+            <div class="text-emerald-400 font-bold">🔑 id: INTEGER PRIMARY KEY</div>
+            <div>• name: TEXT UNIQUE</div>
+            <div>• industry: TEXT</div>
+            <div>• website, logo_url: TEXT</div>
+            <div>• description: TEXT</div>
+          </div>
+        </div>
+
+        <!-- Table: JOBS -->
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-amber-500/20 space-y-1.5 font-mono text-[11px]">
+          <div class="flex items-center justify-between border-b border-white/10 pb-1 font-sans">
+            <span class="font-bold text-amber-400">TABLE: jobs</span>
+            <span class="text-[10px] text-slate-500">Drives & Criteria</span>
+          </div>
+          <div class="text-slate-300 space-y-0.5">
+            <div class="text-emerald-400 font-bold">🔑 id: INTEGER PRIMARY KEY</div>
+            <div class="text-sky-300">⚓ company_id: INT REFERENCES companies</div>
+            <div>• title, role_category: TEXT</div>
+            <div>• min_cgpa: REAL, max_backlogs: INT</div>
+            <div>• eligible_branches: JSON ARRAY</div>
+            <div>• ctc: TEXT, deadline: DATETIME</div>
+          </div>
+        </div>
+
+        <!-- Table: APPLICATIONS -->
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-sky-500/20 space-y-1.5 font-mono text-[11px]">
+          <div class="flex items-center justify-between border-b border-white/10 pb-1 font-sans">
+            <span class="font-bold text-sky-400">TABLE: applications</span>
+            <span class="text-[10px] text-slate-500">Candidate Pipeline</span>
+          </div>
+          <div class="text-slate-300 space-y-0.5">
+            <div class="text-emerald-400 font-bold">🔑 id: INTEGER PRIMARY KEY</div>
+            <div class="text-sky-300">⚓ student_id: INT REFERENCES students</div>
+            <div class="text-sky-300">⚓ job_id: INT REFERENCES jobs</div>
+            <div>• status: submitted/shortlisted/selected</div>
+            <div>• override_reason: TEXT</div>
+            <div>• override_by: INT REFERENCES users</div>
+          </div>
+        </div>
+
+        <!-- Table: INTERVIEW_SCHEDULES -->
+        <div class="p-3.5 rounded-xl bg-slate-900/80 border border-emerald-500/20 space-y-1.5 font-mono text-[11px]">
+          <div class="flex items-center justify-between border-b border-white/10 pb-1 font-sans">
+            <span class="font-bold text-emerald-400">TABLE: interview_schedules</span>
+            <span class="text-[10px] text-slate-500">Interview Slots</span>
+          </div>
+          <div class="text-slate-300 space-y-0.5">
+            <div class="text-emerald-400 font-bold">🔑 id: INTEGER PRIMARY KEY</div>
+            <div class="text-sky-300">⚓ application_id: INT REFERENCES applications</div>
+            <div class="text-sky-300">⚓ job_id, student_id: INT REFERENCES</div>
+            <div>• round_name, interviewer_name: TEXT</div>
+            <div>• interview_time: DATETIME</div>
+            <div>• meeting_link: TEXT (Google Meet)</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-400 border-t border-white/[0.06] pt-2 flex justify-between">
+        <span class="text-emerald-400 font-mono">✓ Foreign Keys Enabled • Indexes on (student_id, job_id, status)</span>
+        <span>Slide 8 / 12</span>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 9: APPLICATION SCREENSHOTS -->
+    <!-- ======================================================== -->
+    <div id="slide-9" class="slide-container slide-card p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[580px] hidden">
+      <div class="border-b border-white/[0.06] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">UI / UX Visual Showcase</span>
+          <h2 class="text-2xl font-black text-white mt-0.5">Slide 9: Live Application Screenshots</h2>
+        </div>
+        <span class="px-2.5 py-1 rounded-md text-[11px] bg-sky-500/10 text-sky-400 border border-sky-500/20 font-bold">PRODUCTION DASHBOARD VIEWS</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 my-auto py-3">
+        <!-- Shot 1 -->
+        <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 space-y-2">
+          <div class="aspect-video rounded-lg overflow-hidden border border-white/10 bg-black">
+            <img src="campushire_overview.png" alt="Admin Overview" class="w-full h-full object-cover">
+          </div>
+          <h4 class="text-xs font-bold text-sky-300">1. Admin Overview</h4>
+          <p class="text-[11px] text-slate-400 leading-normal">
+            84% placement metric cards, Ongoing Drives pipeline table, and Upcoming Schedules calendar.
+          </p>
+        </div>
+
+        <!-- Shot 2 -->
+        <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 space-y-2">
+          <div class="aspect-video rounded-lg overflow-hidden border border-white/10 bg-black">
+            <img src="integrated_eligibility_audit.png" alt="Eligibility Audit" class="w-full h-full object-cover">
+          </div>
+          <h4 class="text-xs font-bold text-emerald-300">2. Smart Eligibility Audit</h4>
+          <p class="text-[11px] text-slate-400 leading-normal">
+            Live candidate evaluation (Rahul Sharma vs Google SDE), CGPA / backlog checks with audit pills.
+          </p>
+        </div>
+
+        <!-- Shot 3 -->
+        <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 space-y-2">
+          <div class="aspect-video rounded-lg overflow-hidden border border-white/10 bg-black">
+            <img src="integrated_override_modal.png" alt="Override Modal" class="w-full h-full object-cover">
+          </div>
+          <h4 class="text-xs font-bold text-amber-300">3. Dean Override Modal</h4>
+          <p class="text-[11px] text-slate-400 leading-normal">
+            Formal administrative override with signed exception policy rationale and Fast-Track Pass.
+          </p>
+        </div>
+
+        <!-- Shot 4 -->
+        <div class="p-3 rounded-xl bg-slate-900/80 border border-white/5 space-y-2">
+          <div class="aspect-video rounded-lg overflow-hidden border border-white/10 bg-black">
+            <img src="integrated_student_portal.png" alt="Student Portal" class="w-full h-full object-cover">
+          </div>
+          <h4 class="text-xs font-bold text-purple-300">4. Student 1-Click Portal</h4>
+          <p class="text-[11px] text-slate-400 leading-normal">
+            Personalized student view, academic breakdown, eligible drive discovery, and 1-click apply.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-500 border-t border-white/[0.06] pt-3 flex justify-between">
+        <span>CampusHire — Application Showcase</span>
+        <span>Slide 9 / 12</span>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 10: TESTING AND RESULTS -->
+    <!-- ======================================================== -->
+    <div id="slide-10" class="slide-container slide-card p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[580px] hidden">
+      <div class="border-b border-white/[0.06] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">Quality Assurance & Scale</span>
+          <h2 class="text-2xl font-black text-white mt-0.5">Slide 10: Testing Results & Empirical Verification</h2>
+        </div>
+        <span class="px-2.5 py-1 rounded-md text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">100% TEST PASS RATE</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto py-3">
+        <!-- Left: Test Summary Badge (5 Cols) -->
+        <div class="lg:col-span-5 space-y-3">
+          <div class="p-5 rounded-xl bg-gradient-to-br from-emerald-950/40 to-slate-900 border border-emerald-500/30 text-center space-y-2">
+            <span class="text-3xl font-black text-emerald-400 block font-mono">52 / 52 PASSED</span>
+            <span class="text-xs font-bold text-white block">0 Failed • 100% Assertion Success Rate</span>
+            <span class="text-[11px] text-slate-400 block font-mono">node tests/api.test.js</span>
+          </div>
+
+          <div class="space-y-1.5 text-xs">
+            <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 flex justify-between items-center">
+              <span class="text-slate-300">1. System Health & Ping</span>
+              <span class="text-emerald-400 font-mono font-bold">2/2 Passed</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 flex justify-between items-center">
+              <span class="text-slate-300">2. RBAC & JWT Security</span>
+              <span class="text-emerald-400 font-mono font-bold">8/8 Passed</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 flex justify-between items-center">
+              <span class="text-slate-300">3. Eligibility Audit Engine</span>
+              <span class="text-emerald-400 font-mono font-bold">11/11 Passed</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 flex justify-between items-center">
+              <span class="text-slate-300">4. Application State Transitions</span>
+              <span class="text-emerald-400 font-mono font-bold">10/10 Passed</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 flex justify-between items-center">
+              <span class="text-slate-300">5. Interview Scheduling</span>
+              <span class="text-emerald-400 font-mono font-bold">4/4 Passed</span>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-900/60 border border-white/5 flex justify-between items-center">
+              <span class="text-slate-300">6. Dashboard Aggregations</span>
+              <span class="text-emerald-400 font-mono font-bold">17/17 Passed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Scale Benchmarks (7 Cols) -->
+        <div class="lg:col-span-7 space-y-3">
+          <h3 class="text-xs font-bold text-sky-400 uppercase tracking-wider">Cohort Scale Verification</h3>
+
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3.5 rounded-xl bg-slate-900/70 border border-white/5 space-y-1">
+              <span class="text-[11px] text-slate-400 uppercase font-medium">Registered Cohort</span>
+              <span class="text-xl font-black text-white block">841 Students</span>
+              <span class="text-[10px] text-emerald-400 font-medium">Pre-seeded with profiles</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/70 border border-white/5 space-y-1">
+              <span class="text-[11px] text-slate-400 uppercase font-medium">Placed Candidates</span>
+              <span class="text-xl font-black text-white block">705 Placed</span>
+              <span class="text-[10px] text-emerald-400 font-medium">83.83% ≈ 84% placed rate</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/70 border border-white/5 space-y-1">
+              <span class="text-[11px] text-slate-400 uppercase font-medium">Partner Companies</span>
+              <span class="text-xl font-black text-white block">24 Companies</span>
+              <span class="text-[10px] text-sky-400 font-medium">Tier-1 & startups</span>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-900/70 border border-white/5 space-y-1">
+              <span class="text-[11px] text-slate-400 uppercase font-medium">Open Job Postings</span>
+              <span class="text-xl font-black text-white block">147 Open Roles</span>
+              <span class="text-[10px] text-sky-400 font-medium">148 Total roles catalog</span>
+            </div>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/10 space-y-1">
+            <span class="text-xs font-bold text-white block">🚀 Performance Benchmark:</span>
+            <p class="text-xs text-slate-300">
+              Deterministic rule evaluation completes in &lt; 25ms. End-to-end integration test suite executes 52 test assertions across auth, eligibility, scheduling, and aggregation in under 1.8 seconds.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-500 border-t border-white/[0.06] pt-3 flex justify-between">
+        <span>CampusHire — Testing & Benchmarks</span>
+        <span>Slide 10 / 12</span>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 11: DEPLOYMENT AND CHALLENGES -->
+    <!-- ======================================================== -->
+    <div id="slide-11" class="slide-container slide-card p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[580px] hidden">
+      <div class="border-b border-white/[0.06] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">DevOps & Problem Solving</span>
+          <h2 class="text-2xl font-black text-white mt-0.5">Slide 11: Deployment & Engineering Challenges</h2>
+        </div>
+        <span class="px-2.5 py-1 rounded-md text-[11px] bg-amber-500/10 text-amber-400 border border-amber-500/20 font-bold">SOLUTIONS APPLIED</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto py-3">
+        <!-- Left: Deployment Access Points (5 Cols) -->
+        <div class="lg:col-span-5 space-y-3">
+          <h3 class="text-xs font-bold text-sky-400 uppercase tracking-wider">Deployment Topology</h3>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/70 border border-white/5 space-y-1">
+            <span class="text-xs font-bold text-white block">Frontend Client SPA:</span>
+            <span class="text-xs font-mono text-sky-400 block">http://localhost:5173</span>
+            <span class="text-[11px] text-slate-400 block">Vite 6 SPA with concurrent proxy configuration</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/70 border border-white/5 space-y-1">
+            <span class="text-xs font-bold text-white block">Backend REST API:</span>
+            <span class="text-xs font-mono text-emerald-400 block">http://localhost:5000</span>
+            <span class="text-[11px] text-slate-400 block">Express server with native node:sqlite engine</span>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/70 border border-white/5 space-y-1">
+            <span class="text-xs font-bold text-white block">GitHub Repository:</span>
+            <span class="text-xs font-mono text-amber-400 block">campus_backend.git</span>
+            <span class="text-[11px] text-slate-400 block">Unified full-stack repository with seed scripts</span>
+          </div>
+        </div>
+
+        <!-- Right: 4 Engineering Challenges & Fixes (7 Cols) -->
+        <div class="lg:col-span-7 space-y-2">
+          <h3 class="text-xs font-bold text-amber-400 uppercase tracking-wider">4 Critical Engineering Challenges & Solutions</h3>
+
+          <div class="p-2.5 rounded-xl bg-slate-900/70 border border-white/5 space-y-0.5">
+            <span class="text-xs font-bold text-white">1. C++ Addon Build Failures on SQLite:</span>
+            <p class="text-[11px] text-slate-400"><strong>Solution:</strong> Upgraded to Node 22 native <code class="text-sky-300">node:sqlite</code> module, completely bypassing node-gyp and python compiler errors.</p>
+          </div>
+
+          <div class="p-2.5 rounded-xl bg-slate-900/70 border border-white/5 space-y-0.5">
+            <span class="text-xs font-bold text-white">2. Primary Key Drift During Database Re-seeding:</span>
+            <p class="text-[11px] text-slate-400"><strong>Solution:</strong> Eliminated hardcoded autoincrement IDs in the frontend; dynamically mapped entities by unique email and company name.</p>
+          </div>
+
+          <div class="p-2.5 rounded-xl bg-slate-900/70 border border-white/5 space-y-0.5">
+            <span class="text-xs font-bold text-white">3. State Machine Terminal Status Corruption:</span>
+            <p class="text-[11px] text-slate-400"><strong>Solution:</strong> Enforced state machine validation blocking illegal status jumps (e.g. withdrawing already placed candidates).</p>
+          </div>
+
+          <div class="p-2.5 rounded-xl bg-slate-900/70 border border-white/5 space-y-0.5">
+            <span class="text-xs font-bold text-white">4. High-Fidelity 1080p Demo Video Recording:</span>
+            <p class="text-[11px] text-slate-400"><strong>Solution:</strong> Piped Chrome DevTools Protocol screencast frames directly into FFmpeg H.264 encoder with animated cursor tracking.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-500 border-t border-white/[0.06] pt-3 flex justify-between">
+        <span>CampusHire — Deployment & Engineering</span>
+        <span>Slide 11 / 12</span>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 12: CONCLUSION AND FUTURE SCOPE -->
+    <!-- ======================================================== -->
+    <div id="slide-12" class="slide-container slide-card p-6 sm:p-10 relative overflow-hidden flex flex-col justify-between min-h-[580px] hidden">
+      <div class="border-b border-white/[0.06] pb-3 flex items-center justify-between">
+        <div>
+          <span class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">Vision & Horizons</span>
+          <h2 class="text-2xl font-black text-white mt-0.5">Slide 12: Conclusion, Limitations & Future Scope</h2>
+        </div>
+        <span class="px-2.5 py-1 rounded-md text-[11px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">PROJECT SUMMARY</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto py-3">
+        <!-- Left: Summary of Results (6 Cols) -->
+        <div class="lg:col-span-6 space-y-3">
+          <h3 class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Project Summary & Impact</h3>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/5 space-y-1">
+            <span class="text-xs font-bold text-white flex items-center gap-1.5"><span class="text-emerald-400">✓</span> 100% Automated Eligibility Auditing:</span>
+            <p class="text-xs text-slate-400">Transformed slow, error-prone manual spreadsheets into instantaneous sub-25ms algorithmic verification.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/5 space-y-1">
+            <span class="text-xs font-bold text-white flex items-center gap-1.5"><span class="text-emerald-400">✓</span> Total Stakeholder Transparency:</span>
+            <p class="text-xs text-slate-400">Empowered students with 1-click applications and provided recruiters with live candidate stage kanbans.</p>
+          </div>
+
+          <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-500/20 space-y-1">
+            <span class="text-xs font-bold text-amber-300">⚠️ Current Limitations:</span>
+            <p class="text-xs text-slate-300">
+              Single-node local SQLite storage and mock external meeting links. Ready for cloud-native PostgreSQL replication and Google Workspace OAuth.
+            </p>
+          </div>
+        </div>
+
+        <!-- Right: Future Innovations (6 Cols) -->
+        <div class="lg:col-span-6 space-y-2.5">
+          <h3 class="text-xs font-bold text-sky-400 uppercase tracking-wider">Future Scope & Roadmap</h3>
+
+          <div class="p-2.5 rounded-xl bg-slate-900/60 border border-white/5 flex items-start gap-2.5">
+            <span class="text-lg">🤖</span>
+            <div>
+              <h4 class="text-xs font-bold text-white">AI Resume Keyword Scoring & ATS Match</h4>
+              <p class="text-[11px] text-slate-400">LLM embeddings to recommend skill improvements based on company job descriptions.</p>
+            </div>
+          </div>
+
+          <div class="p-2.5 rounded-xl bg-slate-900/60 border border-white/5 flex items-start gap-2.5">
+            <span class="text-lg">📲</span>
+            <div>
+              <h4 class="text-xs font-bold text-white">WhatsApp & SMS Automated Dispatcher</h4>
+              <p class="text-[11px] text-slate-400">Push notifications alerting candidates to interview call letters and slot times.</p>
+            </div>
+          </div>
+
+          <div class="p-2.5 rounded-xl bg-slate-900/60 border border-white/5 flex items-start gap-2.5">
+            <span class="text-lg">💻</span>
+            <div>
+              <h4 class="text-xs font-bold text-white">In-Browser Live Coding Sandbox & Proctoring</h4>
+              <p class="text-[11px] text-slate-400">Built-in coding assessments and video proctoring for remote hiring drives.</p>
+            </div>
+          </div>
+
+          <div class="p-2.5 rounded-xl bg-slate-900/60 border border-white/5 flex items-start gap-2.5">
+            <span class="text-lg">🌐</span>
+            <div>
+              <h4 class="text-xs font-bold text-white">Multi-University Placement Consortium</h4>
+              <p class="text-[11px] text-slate-400">Federate pooled placement drives across sister institutions with unified analytics.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-xs text-slate-500 border-t border-white/[0.06] pt-3 flex items-center justify-between">
+        <span class="text-sky-400 font-bold">Thank You! — Questions & Discussion</span>
+        <span>Slide 12 / 12</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SPEAKER NOTES TELEPROMPTER DRAWER (Collapsible) -->
+  <div id="notesDrawer" class="no-print max-w-7xl w-full mx-auto glass-surface p-4 rounded-2xl mt-4 hidden border-l-4 border-l-amber-500 transition-all shadow-2xl">
+    <div class="flex items-center justify-between border-b border-white/10 pb-2 mb-2">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+        <h4 class="text-xs font-bold text-amber-300 uppercase tracking-wider">Speaker Notes Teleprompter</h4>
+        <span id="notesSlideTag" class="text-[10px] font-mono text-slate-400 bg-black/40 px-2 py-0.5 rounded border border-white/5">Slide 1 of 12</span>
+      </div>
+      <span class="text-[11px] text-slate-400">Press <kbd class="px-1.5 py-0.5 rounded bg-slate-800 text-sky-300 border border-white/10 font-mono">S</kbd> to hide</span>
+    </div>
+    <p id="speakerNotesText" class="text-xs text-slate-300 leading-relaxed font-sans">
+      "Good morning, judges and faculty. We are Team ByteCraft presenting CampusHire, an intelligent college placement and recruitment automation portal under problem statement HACK-P410. Our project directly addresses the operational bottlenecks colleges face during placement season."
+    </p>
+  </div>
+
+  <!-- BOTTOM NAVIGATION & CONTROLS -->
+  <footer class="no-print max-w-7xl w-full mx-auto flex flex-wrap items-center justify-between gap-3 glass-surface p-3.5 rounded-2xl mt-4 shadow-xl">
+    <!-- Prev / Next Buttons -->
+    <div class="flex items-center gap-2">
+      <button 
+        onclick="prevSlide()" 
+        id="prevBtn" 
+        class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-xs font-semibold text-slate-200 border border-white/5 transition flex items-center gap-1.5"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <span>Prev</span>
+      </button>
+
+      <button 
+        onclick="nextSlide()" 
+        id="nextBtn" 
+        class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-xs font-semibold text-white shadow-lg shadow-sky-500/20 transition flex items-center gap-1.5"
+      >
+        <span>Next</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <!-- Slide Thumbnails / Indicator Dots -->
+    <div class="flex items-center gap-1.5 flex-wrap justify-center">
+      <template id="dotTemplate">
+        <button class="h-2 rounded-full transition-all duration-200"></button>
+      </template>
+      <div id="dotsContainer" class="flex items-center gap-1.5"></div>
+    </div>
+
+    <!-- Quick Shortcuts Legend -->
+    <div class="hidden sm:flex items-center gap-2 text-[11px] text-slate-400 font-mono">
+      <span>Keys: <kbd class="px-1 py-0.5 rounded bg-slate-800 text-sky-300 border border-white/10">←</kbd> <kbd class="px-1 py-0.5 rounded bg-slate-800 text-sky-300 border border-white/10">→</kbd></span>
+      <span>•</span>
+      <span>Fullscreen: <kbd class="px-1 py-0.5 rounded bg-slate-800 text-sky-300 border border-white/10">F</kbd></span>
+    </div>
+  </footer>
+
+  <!-- PRESENTATION LOGIC JAVASCRIPT -->
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 12;
+
+    const speakerNotes = {
+      1: "Good morning, respected judges and professors. We are Team ByteCraft presenting CampusHire, an intelligent college placement and recruitment automation portal under problem statement HACK-P410. Our team members are RAMAGIRI MANISH as lead, Challa Bharat, kanuri Thanush Sree Ram, and Devata sai nihar from branch CSE(AI). Let us walk you through how CampusHire transforms campus placements.",
+      2: "Every placement season, university placement cells struggle with manual spreadsheets, conflicting eligibility criteria, and disjointed communication across WhatsApp and emails. Over 100 spreadsheets create human error and delay recruitment by 3 to 5 days. For students, it means high anxiety; for recruiters, wasted slots; and for universities, risk to their top institutional KPI.",
+      3: "Our primary objective was to achieve sub-second automated eligibility auditing, a multi-role RBAC architecture, strict state-machine applicant tracking, and live cohort analytics. CampusHire solves this with a deterministic rule engine, Dean exception override workflows, and real-time dashboard metric aggregation.",
+      4: "Here are our core working features: real-time metric cards showing 84% placement across 23 active partner drives and 147 open roles; automated eligibility auditing; administrative Dean override modals; interactive candidate pipeline advancement; 1-click persona switching; and an interview calendar with Google Meet links.",
+      5: "Our tech stack is built for speed and resilience. On the frontend, we use React 19 SPA, Tailwind CSS v4 with dark mode styling, and Lucide icons. On the backend, we run Node.js 22+ with Express.js REST APIs and JWT security. For data, we adopted native node:sqlite with WAL journaling and zero external native C++ compilation dependencies.",
+      6: "This multi-tier system architecture illustrates the clean separation of concerns. From the React SPA client, authenticated REST requests pass through JWT route guards. Our business logic engine executes deterministic rules in under 25ms and commits transactions to our relational SQLite database.",
+      7: "Our backend implements clean RESTful endpoints: /api/auth for JWT issuance, /api/jobs for drive catalogs, check-eligibility for sub-second rule evaluation, and applications/override for Dean exceptions. All endpoints enforce strict forward status transitions to guarantee state machine integrity.",
+      8: "The database design features 6 relational tables with foreign keys and cascade integrity: users, students, companies, jobs, applications, and interview schedules. We've scaled and verified this with a synthetic campus cohort of 841 students and 148 job roles.",
+      9: "Here are actual production screenshots: the Admin Overview with live 84% placement metrics, the Smart Eligibility Audit panel comparing Rahul Sharma against Google SDE criteria, the Dean Exception Override modal with signed policy justifications, and the Student 1-Click Apply portal.",
+      10: "We executed rigorous automated testing: 52 out of 52 tests passed with 100% assertion success rate across health, RBAC security, eligibility audits, pipeline state transitions, interview scheduling, and dashboard aggregations. Our test suite runs end-to-end in under 1.8 seconds.",
+      11: "CampusHire is fully deployed locally with concurrent Vite frontend and Express backend. We overcame four key engineering hurdles: bypassing C++ SQLite compilation with node:sqlite, resolving database primary key drift with natural keys, enforcing terminal state machine safety, and building a 1080p CDP video capture pipeline.",
+      12: "In conclusion, CampusHire elevates placement operations from days of manual labor to instantaneous algorithmic audits. Looking forward, we plan to introduce AI resume scoring, automated WhatsApp dispatchers, and coding sandboxes. Thank you, and we welcome your questions!"
+    };
+
+    function showSlide(num) {
+      if (num < 1 || num > totalSlides) return;
+      currentSlide = num;
+
+      // Toggle slide containers
+      for (let i = 1; i <= totalSlides; i++) {
+        const el = document.getElementById(`slide-${i}`);
+        if (el) {
+          if (i === currentSlide) {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        }
+      }
+
+      // Update indicators
+      document.getElementById('currentSlideNum').innerText = currentSlide;
+      document.getElementById('prevBtn').disabled = (currentSlide === 1);
+      document.getElementById('nextBtn').disabled = (currentSlide === totalSlides);
+
+      // Update dots
+      for (let i = 1; i <= totalSlides; i++) {
+        const dot = document.getElementById(`dot-${i}`);
+        if (dot) {
+          if (i === currentSlide) {
+            dot.className = "h-2 w-7 rounded-full bg-sky-400 transition-all duration-200";
+          } else {
+            dot.className = "h-2 w-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all duration-200";
+          }
+        }
+      }
+
+      // Update speaker notes
+      document.getElementById('notesSlideTag').innerText = `Slide ${currentSlide} of 12`;
+      document.getElementById('speakerNotesText').innerText = speakerNotes[currentSlide] || "No notes for this slide.";
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) showSlide(currentSlide - 1);
+    }
+
+    function toggleNotes() {
+      const drawer = document.getElementById('notesDrawer');
+      drawer.classList.toggle('hidden');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          console.log(`Error attempting to enable fullscreen: ${err.message}`);
+        });
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        showSlide(1);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        showSlide(totalSlides);
+      } else if (e.key.toLowerCase() === 's') {
+        toggleNotes();
+      } else if (e.key.toLowerCase() === 'f') {
+        toggleFullscreen();
+      }
+    });
+
+    // Initialize dots
+    const dotsContainer = document.getElementById('dotsContainer');
+    for (let i = 1; i <= totalSlides; i++) {
+      const btn = document.createElement('button');
+      btn.id = `dot-${i}`;
+      btn.title = `Jump to Slide ${i}`;
+      btn.onclick = () => showSlide(i);
+      dotsContainer.appendChild(btn);
+    }
+
+    // Initial display
+    showSlide(1);
+  </script>
+</body>
+</html>
